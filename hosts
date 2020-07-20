@@ -1,0 +1,2 @@
+[gitlab_runner]
+hoags ansible_user=centos ansible_host=10.111.161.200

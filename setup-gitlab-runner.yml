@@ -1,0 +1,63 @@
+- hosts: gitlab_runner
+  remote_user: centos
+# See https://docs.docker.com/install/linux/docker-ce/centos/.
+  tasks:
+  - name: Install yum-utils package.
+    yum:
+      name: yum-utils
+      state: installed
+    become: yes
+  - name: Install device-mapper-persistent-data package.
+    yum:
+      name: device-mapper-persistent-data
+      state: installed
+    become: yes
+  - name: Install lvm2 package.
+    yum:
+      name: lvm2
+      state: installed
+    become: yes
+  - name: Add Docker CE stable repository.
+    get_url:
+        url: https://download.docker.com/linux/centos/docker-ce.repo
+        dest: /etc/yum.repos.d/docker-ce.repo
+    become: yes
+  - name: Install docker-ce package.
+    yum:
+      name: docker-ce
+      state: installed
+    become: yes
+  - name: Install docker-ce-cli package.
+    yum:
+      name: docker-ce-cli
+      state: installed
+    become: yes
+  - name: Install containerd.io package.
+    yum:
+      name: containerd.io
+      state: installed
+    become: yes
+  - name: Start Docker service.
+    service:
+      name: docker
+      state: started
+      enabled: yes
+    become: yes
+
+- hosts: gitlab_runner
+  remote_user: centos
+# See https://docs.gitlab.com/runner/install/linux-repository.html#installing-the-runner.
+  tasks:
+  - name: Add GitLab's official repository.
+    shell: curl -L https://packages.gitlab.com/install/repositories/runner/gitlab-runner/script.rpm.sh | sudo bash
+  - name: Install gitlab-runner package.
+    yum:
+      name: gitlab-runner
+      state: installed
+    become: yes
+  - name: Unregister all previously registered GitLab Runners
+    command: "gitlab-runner unregister --all-runners"
+    become: yes
+  - name: Register GitLab Runner.
+    command: gitlab-runner register -n --url https://gitlab.rc.uab.edu --registration-token ymf5VunNmF3oqk9nbAqc --executor docker --docker-image "docker:19.03.4" --docker-privileged --docker-volumes "/certs/client" --docker-extra-hosts "cheaha.rc.uab.edu:10.111.161.26"
+    become: yes
