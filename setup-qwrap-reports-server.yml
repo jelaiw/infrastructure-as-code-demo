@@ -1,0 +1,28 @@
+- hosts: qwrap_reports_server
+  remote_user: centos
+  tasks:
+  - name: Install httpd package.
+    yum:
+      name: httpd
+      state: installed
+    become: yes
+  - name: Start httpd service.
+    service:
+      name: httpd
+      state: started
+      enabled: yes
+    become: yes
+  - name: Install EPEL.
+    yum:
+      name: epel-release
+      state: installed
+    become: yes
+# See https://www.howtoforge.com/tutorial/how-to-install-sshfs-on-centos-7/, fuse-sshfs package is in EPEL. 
+  - name: Install fuse-sshfs package.
+    yum:
+      name: fuse-sshfs
+      state: installed
+    become: yes
+  - name: Generate ssh key pair.
+    openssh_keypair:
+      path: ~/.ssh/id_rsa
