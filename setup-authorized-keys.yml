@@ -1,0 +1,16 @@
+- hosts: gitlab_runner, qwrap_reports_server
+  remote_user: centos
+  tasks:
+  - name: Authorize Jelai's public keys.
+    authorized_key:
+      user: centos
+      state: present
+      key: "{{ lookup('file', 'jelai.keys') }}"
+- hosts: qwrap_reports_server
+  remote_user: centos
+  tasks:
+  - name: Authorize Liam's public keys.
+    authorized_key:
+      user: centos
+      state: present
+      key: "{{ lookup('file', 'liam.keys') }}"
