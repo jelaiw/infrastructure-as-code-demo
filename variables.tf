@@ -4,3 +4,6 @@ variable "admin_key_pair" {
 
 variable "hoags_floating_ip" {
 }
+
+variable "cigar_floating_ip" {
+}
