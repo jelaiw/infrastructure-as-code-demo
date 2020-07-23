@@ -1,0 +1,68 @@
+- hosts: docker
+  remote_user: centos
+# See https://docs.docker.com/install/linux/docker-ce/centos/.
+  tasks:
+  - name: Install yum-utils package.
+    yum:
+      name: yum-utils
+      state: installed
+    become: yes
+  - name: Install device-mapper-persistent-data package.
+    yum:
+      name: device-mapper-persistent-data
+      state: installed
+    become: yes
+  - name: Install lvm2 package.
+    yum:
+      name: lvm2
+      state: installed
+    become: yes
+  - name: Add Docker CE stable repository.
+    get_url:
+        url: https://download.docker.com/linux/centos/docker-ce.repo
+        dest: /etc/yum.repos.d/docker-ce.repo
+    become: yes
+  - name: Install docker-ce package.
+    yum:
+      name: docker-ce
+      state: installed
+    become: yes
+  - name: Install docker-ce-cli package.
+    yum:
+      name: docker-ce-cli
+      state: installed
+    become: yes
+  - name: Install containerd.io package.
+    yum:
+      name: containerd.io
+      state: installed
+    become: yes
+  - name: Start Docker service.
+    service:
+      name: docker
+      state: started
+      enabled: yes
+    become: yes
+  - name: Install git package.
+    yum:
+      name: git
+      state: installed
+    become: yes
+  - name: Generate ssh key pair.
+    openssh_keypair:
+      path: ~/.ssh/id_rsa
+  - name: Add centos user to docker Unix group.
+    user:
+      name: centos
+      groups: docker
+    become: yes
+  - name: Install vim package.
+    yum:
+      name: vim
+      state: installed
+    become: yes
+  - name: Install wget package.
+    yum:
+      name: wget
+      state: installed
+    become: yes

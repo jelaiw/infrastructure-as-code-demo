@@ -19,4 +19,6 @@ The `hosts` file is the Ansible inventory.
 
 `setup-gitlab-runner.yml` is a dvctools GitLab Runner playbook.
 
+`setup-docker.yml` is a Docker build box playbook.
+
 `setup-authorized-keys.yml` is a playbook for authorizing ssh keys to specific hosts.
