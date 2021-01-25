@@ -52,7 +52,7 @@
     shell: curl -L https://packages.gitlab.com/install/repositories/runner/gitlab-runner/script.rpm.sh | sudo bash
   - name: Install gitlab-runner package.
     yum:
-      name: gitlab-runner
+      name: gitlab-runner-13.8.0
       state: installed
     become: yes
   - name: Unregister all previously registered GitLab Runners
