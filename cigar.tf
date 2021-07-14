@@ -1,10 +1,10 @@
-# QWRAP reports web server test
+# Docker build box
 resource "openstack_compute_instance_v2" "cigar" {
 	name = "cigar"
 	image_name = "CentOS-7-x86_64-GenericCloud-1905"
 	flavor_name = "m1.medium"
 	key_pair = var.admin_key_pair
-	security_groups = ["default", "web"]
+	security_groups = ["default"]
 
 # Work around race condition.
 # See https://github.com/terraform-providers/terraform-provider-openstack/issues/775.
