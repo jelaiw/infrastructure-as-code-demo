@@ -1,4 +1,4 @@
-- hosts: gitlab_runner, qwrap_reports_server
+- hosts: gitlab_runner, docker
   remote_user: centos
   tasks:
   - name: Authorize Jelai's public keys.
@@ -6,7 +6,7 @@
       user: centos
       state: present
       key: "{{ lookup('file', 'jelai.keys') }}"
-- hosts: qwrap_reports_server
+- hosts: docker
   remote_user: centos
   tasks:
   - name: Authorize Liam's public keys.
