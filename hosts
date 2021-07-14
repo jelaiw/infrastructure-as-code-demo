@@ -1,5 +1,5 @@
 [gitlab_runner]
 hoags ansible_user=centos ansible_host=10.111.161.200
 
-[qwrap_reports_server]
+[docker]
 cigar ansible_user=centos ansible_host=10.111.161.224
