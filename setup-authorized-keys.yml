@@ -14,3 +14,8 @@
       user: centos
       state: present
       key: "{{ lookup('file', 'liam.keys') }}"
+  - name: Authorize Curtis' public keys.
+    authorized_key:
+      user: centos
+      state: present
+      key: "{{ lookup('file', 'curtis.keys') }}"
