@@ -1,4 +1,5 @@
-# CCTS Informatics Shared Team OpenStack Infrastructure
+# Infrastructure-as-Code Demo
+A proof-of-concept implementation with Terraform configuration for an OpenStack provider, a Terraform Cloud remote backend, and various Ansible playbooks for software configuration management.
 
 ### Terraform
 The `*.tf` files comprise the Terraform configuration.
